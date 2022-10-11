@@ -1,0 +1,49 @@
+<section vh-100 gradient-custom>
+   <div class="container col-md-4">
+      <h2 style="color:rebeccapurple">Login Form</h2>
+      <form #loginform="ngForm" (ngSubmit)="loginUser()">
+         <p>Please login to your account</p>
+         <!-- {{loginform.form.valid}} -->
+         <small class="text-danger">{{msg}}</small>
+         <div class="form-outline mb-4">
+            <!-- <label for="email"><b>Email:</b></label>
+             <label class="form-label" for="form2Example11">Email</label>-->
+
+            <input type="email" class="form-control" placeholder="User Name" name="username" [(ngModel)]="user.username"
+               required #username="ngModel" [class.is-invalid]="username.invalid && username.touched">
+            <!-- <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email_Id is required</small> -->
+            <!-- <div *ngIf="email.errors && (email.invalid && email.touched)">
+        <small class="text-danger" *ngIf="['email.errors.required']">EmailId is required</small>
+          <small class="text-danger" *ngIf="['email.errors.pattern']">Enter Valid Email_Id</small>
+           </div> -->
+            <div *ngIf="(username.invalid && username.touched) || username.dirty">
+               <small *ngIf="username.errors?.['required']" class="text-danger">UserName is required</small>
+               <!--question mark(?) is a safe navigation operator-->
+               <small *ngIf="username.errors?.['pattern']" class="text-danger">Please provide a valid email
+                  address</small>
+            </div>
+
+         </div>
+         <div class="form-outline mb-4">
+            <!-- <label for="pwd"><b>Password:</b></label>
+                <label class="form-label" for="form2Example11">Password</label>
+                 -->
+            <input type="password" #pwd class="form-control" placeholder="Password" name="password"
+               [(ngModel)]="user.password" required #password="ngModel"
+               [class.is-invalid]="password.invalid && password.touched">
+            <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is
+               required</small>
+         </div>
+         <div class="checkbox" class="form-outline mb-4">
+            <label><input type="checkbox" name="remember"> Remember me</label>
+         </div>
+         <button [disabled]="loginform.form.invalid" type="submit" class="btn btn-secondary"><b>Login</b></button>
+      </form>
+
+      <!-- <div class="float-right">New User ? Register Here</div> -->
+      <!-- <small class="float-right" (click)="gotoregistration()">Don't Have an account? Register Here</small>  -->
+
+      <small class="float-right" [routerLink]="['/register']">Don't Have an account? Register Here</small>
+   </div>
+
+</section>
